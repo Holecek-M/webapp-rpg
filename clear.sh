@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Get the ID of the first running container
+container_id=$(sudo docker ps -q | head -n 1)
+
+if [ -z "$container_id" ]; then
+    echo "No running containers found, skipping clean-up"
+else
+    # Stop and remove the existing container
+    sudo docker stop "$container_id"
+    sudo docker rm "$container_id"
+fi
